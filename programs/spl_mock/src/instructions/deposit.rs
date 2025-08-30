@@ -65,8 +65,10 @@ impl<'info> Deposit<'info> {
     // main deposit function → sets up user staking account + transfers tokens
     pub fn deposit(&mut self, amount: u64, bumps: DepositBumps) -> Result<()> {
         self.initialize_user_staking(amount, bumps); // create/record user staking state
-        self.deposit_token(amount) // move tokens into staking vault
-    }
+        self.deposit_token(amount); // move tokens into staking vault
+        self.staking_pool.total_staked+=amount; // update staking pool state
+        Ok(())
+        }
 
     // store initial state for user's staking account
     pub fn initialize_user_staking(&mut self, amount: u64, bumps: DepositBumps) -> Result<()> {
@@ -95,4 +97,5 @@ impl<'info> Deposit<'info> {
         let ctx = CpiContext::new(program_id, accounts);
         transfer(ctx, amount)
     }
+
 }
