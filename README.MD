@@ -33,13 +33,23 @@ It provides functionality for:
 
 ## ⚙️ Features
 
-* **StakingPool account** – Stores global staking pool state:
+### State
+1. **Staking Pool**
+``` pub authority: Pubkey, //the authority of the pool
+    pub staking_mint:Pubkey, //the mint to be staked on the pool
+    pub staking_vault:Pubkey,  //the vault for storing mint token
+    pub total_staked:u64,   //the total amount of token staked
+    pub bump:u8  //the bump for the pda
+    ```
 
-  * Authority
-  * Staking mint
-  * Vault account
-  * Total staked tokens
-* **UserStaking account** – Tracks each user’s staked amount and token account.
+2.  **User Staking**
+``` pub user:Pubkey, //the user involved in the deposit and withdraw for the stakes
+    pub user_token_account:Pubkey,  //the token account of the user 
+    pub staking_pool:Pubkey,    //the staking pool
+    pub amount_staked:u64,  //the amount staked
+    pub bump:u8 //the bump of the pda
+    ```
+
 
 ### Instructions
 
