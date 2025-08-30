@@ -1,7 +1,10 @@
 
-# SPL Mock Staking Program
+---
 
-This project is a **Solana smart contract** (built with [Anchor](https://book.anchor-lang.com/)) that implements a **basic staking mechanism** using mock SPL tokens.
+# 🪙 SPL Mock Staking Program
+
+A **Solana smart contract** built with [Anchor](https://book.anchor-lang.com/) that implements a **basic staking mechanism** using mock SPL tokens.
+
 It provides functionality for:
 
 * Initializing a staking pool
@@ -15,43 +18,49 @@ It provides functionality for:
 ```
 .
 ├── programs/
-│   └── spl_mock/           # Anchor program written in Rust
+│   └── spl_mock/              # Anchor program written in Rust
 │       ├── src/
-│       │   ├── lib.rs      # Program entrypoints
-│       │   ├── instructions/ # Instruction handlers
-│       │   └── state/      # Account state definitions
+│       │   ├── lib.rs         # Program entrypoints
+│       │   ├── instructions/  # Instruction handlers
+│       │   └── state/         # Account state definitions
 │       └── Cargo.toml
 ├── tests/
-│   └── spl_mock.ts         # Mocha/TypeScript tests
-├── target/                 # Build artifacts (generated)
-├── Anchor.toml             # Anchor configuration
-├── Cargo.toml              # Rust workspace config
-└── README.md               # Documentation
+│   └── spl_mock.ts            # Mocha/TypeScript tests
+├── target/                    # Build artifacts (generated)
+├── Anchor.toml                # Anchor configuration
+├── Cargo.toml                 # Rust workspace config
+└── README.md                  # Documentation
 ```
 
 ---
 
 ## ⚙️ Features
 
-### State
-1. **Staking Pool**
-``` pub authority: Pubkey, //the authority of the pool
-    pub staking_mint:Pubkey, //the mint to be staked on the pool
-    pub staking_vault:Pubkey,  //the vault for storing mint token
-    pub total_staked:u64,   //the total amount of token staked
-    pub bump:u8  //the bump for the pda
-    ```
+### 📦 State Accounts
 
-2.  **User Staking**
-``` pub user:Pubkey, //the user involved in the deposit and withdraw for the stakes
-    pub user_token_account:Pubkey,  //the token account of the user 
-    pub staking_pool:Pubkey,    //the staking pool
-    pub amount_staked:u64,  //the amount staked
-    pub bump:u8 //the bump of the pda
-    ```
+#### 1. **Staking Pool**
 
+```rust
+pub authority: Pubkey,        // authority of the pool
+pub staking_mint: Pubkey,     // mint to be staked on the pool
+pub staking_vault: Pubkey,    // vault for storing staked tokens
+pub total_staked: u64,        // total tokens staked
+pub bump: u8,                 // bump for PDA
+```
 
-### Instructions
+#### 2. **User Staking**
+
+```rust
+pub user: Pubkey,             // user involved in staking
+pub user_token_account: Pubkey, // user's token account
+pub staking_pool: Pubkey,     // reference to staking pool
+pub amount_staked: u64,       // amount of tokens staked
+pub bump: u8,                 // bump for PDA
+```
+
+---
+
+### 📜 Instructions
 
 1. **InitializeStakingPool**
 
@@ -72,7 +81,7 @@ It provides functionality for:
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### ✅ Prerequisites
 
 * [Rust](https://www.rust-lang.org/tools/install)
 * [Solana CLI](https://docs.solana.com/cli/install-solana-cli)
@@ -81,13 +90,13 @@ It provides functionality for:
 
 ---
 
-### Build
+### ⚡ Build
 
 ```bash
 anchor build
 ```
 
-### Run Tests
+### 🧪 Run Tests
 
 ```bash
 npm i @solana/web3.js
@@ -103,18 +112,17 @@ This will:
 
 ---
 
-## 🧪 Example Test Flow
+## 🔬 Example Test Flow
 
-In `tests/spl_mock.ts`, the test script does:
+In `tests/spl_mock.ts`, the test script performs:
 
-1. **Airdrops SOL** to the test users and mint authority
-2. **Creates a mint** and mints tokens to the user
-3. **Transfers mint authority** to the staking pool PDA
-4. Calls:
+1. **Airdrop SOL** to test users and mint authority
+2. **Create a mint** and mint tokens to the user
+3. **Transfer mint authority** to the staking pool PDA
+4. Calls program instructions:
 
    * `initializeStakingPool`
    * `deposit(amount)`
    * `withdraw()`
 
 ---
-
