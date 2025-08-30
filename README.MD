@@ -80,6 +80,8 @@ anchor build
 ### Run Tests
 
 ```bash
+npm i @solana/web3.js
+npm i @solana/spl-token
 anchor test
 ```
 
@@ -88,16 +90,6 @@ This will:
 * Deploy the program locally
 * Run the provided TypeScript tests (`tests/spl_mock.ts`)
 * Simulate deposit/withdraw functionality
-
----
-
-## 🔑 Program ID
-
-The deployed program ID (from `declare_id!`) is:
-
-```
-AJNgNbxzPSsuCkJjSp5TyKVmfGc6v3TWr5288Tu4cFiy
-```
 
 ---
 
@@ -111,13 +103,8 @@ In `tests/spl_mock.ts`, the test script does:
 4. Calls:
 
    * `initializeStakingPool`
-   * `deposit(100)`
+   * `deposit(amount)`
    * `withdraw()`
 
 ---
 
-## 📜 License
-
-MIT License.
-
----
